@@ -10,7 +10,6 @@ import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
  * 2. Assign a distinct color to the nodes with the identified maximum values.
 */
 
-
 fun Aggregate<Int>.maxID(environment: EnvironmentVariables) =
     when (environment.get<Boolean>("isMaxID")) {
         true -> searchMaxNeighborIDValue(environment)

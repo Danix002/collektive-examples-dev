@@ -31,7 +31,7 @@
     "size": {
       "max": 100,
       "min": 0,
-      "val": 30
+      "val": 15
     },
     "molFilter": true,
     "molString": "isMaxID",
@@ -91,7 +91,7 @@
     "size": {
       "max": 100,
       "min": 0,
-      "val": 30
+      "val": 5
     },
     "molFilter": true,
     "molString": "isMaxID",
@@ -151,7 +151,7 @@
     "size": {
       "max": 100,
       "min": 0,
-      "val": 30
+      "val": 5
     },
     "molFilter": true,
     "molString": "it.unibo.collektive.examples.maxID.MaxIDKt.maxID",
