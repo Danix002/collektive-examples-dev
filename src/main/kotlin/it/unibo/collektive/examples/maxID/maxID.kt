@@ -10,8 +10,8 @@ import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
  * 1. Identify the maximum value among the neighboring nodes.
  * 2. Assign a distinct color to the nodes with the identified maximum values.
  * Second example - Tutorial:
- * 3. Identify the maximum value in the network
- * 4. 
+ * 3. Identify the maximum value in the network.
+ * 4. Assign a distinct color to the nodes with the identified maximum values.
 */
 
 fun Aggregate<Int>.maxID(environment: EnvironmentVariables) =
@@ -42,10 +42,10 @@ fun Aggregate<Int>.searchMaxNetworkIDValue(environment: EnvironmentVariables): I
         false -> environment.get<Int>("maxNeighborID")
     }
 
-    // Step 1:
+    // Step 1: Exchange the maxNeighborID with neighbors and obtain a field of values
     val neighborValues = neighboringViaExchange(local = environment.get<Int>("maxNeighborID"))
 
-    // Step 2:
+    // Step 2: Find the maximum value among neighbors (including self)
     val maxValue = neighborValues.max(base = environment.get<Int>("maxNeighborID"))
 
     // Step 3: Assign the result to a molecule
