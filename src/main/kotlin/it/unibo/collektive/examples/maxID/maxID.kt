@@ -18,7 +18,7 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables) = maxNetworkID(envir
 
 fun Aggregate<Int>.maxNeighborID(): Int {
     // Step 1: Exchange the localId with neighbors and obtain a field of values
-    val neighborValues = neighboringViaExchange(local = localId)
+    val neighborValues = neighboring(local = localId)
 
     // Step 2: Find the maximum value among neighbors (including self)
     val maxValue = neighborValues.max(base = localId)
@@ -35,7 +35,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     environment["maxNeighborID"] = maxLocalValue
 
     // Step 1: Exchange the maxNeighborID with neighbors and obtain a field of values
-    val neighborValues = neighboringViaExchange(local = maxLocalValue)
+    val neighborValues = neighboring(local = maxLocalValue)
 
     // Step 2: Find the maximum value among neighbors (including self)
     val maxValue = neighborValues.max(base = maxLocalValue)
