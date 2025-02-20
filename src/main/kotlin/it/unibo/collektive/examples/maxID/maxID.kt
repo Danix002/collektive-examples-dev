@@ -1,7 +1,7 @@
 package it.unibo.collektive.examples.maxID
 
 import it.unibo.collektive.aggregate.api.Aggregate
-import it.unibo.collektive.aggregate.api.operators.neighboringViaExchange
+import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
 import it.unibo.collektive.field.operations.max
 import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
 import it.unibo.collektive.examples.diameter.diameter
@@ -45,11 +45,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
 
-    if(environment["isMaxID"] || environment["isMaxLocalID"]){
-        diameter(true)
-    }else{
-        diameter(false)
-    }
+    environment["diameter"] = diameter((environment["isMaxID"] || environment["isMaxLocalID"]))
 
     return maxValue
 }

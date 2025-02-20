@@ -2,7 +2,11 @@ package it.unibo.collektive.examples.diameter
 
 import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.operators.share
-import it.unibo.collektive.stdlib.*
+import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
+import it.unibo.collektive.stdlib.spreading.hopDistanceTo
+import it.unibo.collektive.stdlib.ints.FieldedInts.plus
+import it.unibo.collektive.field.operations.maxBy
+import it.unibo.collektive.field.operations.max
 import kotlin.Int.Companion.MIN_VALUE
 
 /**
@@ -12,10 +16,9 @@ import kotlin.Int.Companion.MIN_VALUE
 */
 
 fun Aggregate<Int>.diameter(source: Boolean): Int {
-    return share(if (source) 0 else MIN_VALUE) { previous ->
-        val distance = hopDistanceTo(source)
-        maxOf(previous, distance)
+    return share(Int.MIN_VALUE) { previous ->
+        val closestDistance = hopDistanceTo(source) 
+        previous.max(closestDistance)
     }
-    
 }
 
