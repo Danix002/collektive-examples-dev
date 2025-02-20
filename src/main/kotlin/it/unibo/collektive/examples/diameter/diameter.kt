@@ -1,7 +1,9 @@
 package it.unibo.collektive.examples.diameter
 
+import it.unibo.collektive.aggregate.api.Aggregate
+import it.unibo.collektive.aggregate.api.operators.share
 import it.unibo.collektive.stdlib.*
-import it.unibo.alchemist.collektive.device.DistanceSensor
+import kotlin.Int.Companion.MIN_VALUE
 
 /**
  * Third example - Tutorial:
@@ -10,9 +12,10 @@ import it.unibo.alchemist.collektive.device.DistanceSensor
 */
 
 fun Aggregate<Int>.diameter(source: Boolean): Int {
-    return share(if (source) 0 else Int.MIN_VALUE) { previous ->
-        val maxDistance = nodeNeighborhood().maxBy { hopDistanceTo(it) }?.let { hopDistanceTo(it) } ?: 0
-        maxOf(previous, maxDistance)
+    return share(if (source) 0 else MIN_VALUE) { previous ->
+        val distance = hopDistanceTo(source)
+        maxOf(previous, distance)
     }
+    
 }
 

@@ -4,6 +4,7 @@ import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.operators.neighboringViaExchange
 import it.unibo.collektive.field.operations.max
 import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
+import it.unibo.collektive.examples.diameter.diameter
 
 /**
  * First example - Tutorial:
@@ -43,6 +44,12 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     // Step 3: Assign the result to a molecule (only if using Alchemist)
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
+
+    if(environment["isMaxID"] || environment["isMaxLocalID"]){
+        diameter(true)
+    }else{
+        diameter(false)
+    }
 
     return maxValue
 }

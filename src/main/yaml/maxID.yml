@@ -27,3 +27,5 @@ deployments:
         concentration: 0
       - molecule: maxNetworkID
         concentration: 0
+      - molecule: diameter
+        concentration: 0
