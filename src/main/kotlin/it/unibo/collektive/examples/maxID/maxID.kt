@@ -45,7 +45,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
 
-    environment["diameter"] = diameter((environment["isMaxID"] || environment["isMaxLocalID"]))
+    environment["diameter"] = diameter(environment["isMaxID"], environment["maxNetworkID"])
 
     return maxValue
 }
