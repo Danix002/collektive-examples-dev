@@ -2,7 +2,7 @@ incarnation: collektive
 
 network-model:
   type: ConnectWithinDistance
-  parameters: [2]
+  parameters: [3]
 
 _pool: &program
   - time-distribution: 1
@@ -13,7 +13,7 @@ _pool: &program
 
 deployments:
   - type: GraphStreamDeployment
-    parameters: [100, 2, 0, PreferentialAttachment]
+    parameters: [50, 3, 0, PreferentialAttachment]
     programs:
       - *program
     contents:
@@ -28,4 +28,6 @@ deployments:
       - molecule: maxNetworkID
         concentration: 0
       - molecule: diameter
+        concentration: null
+      - molecule: distanceToSource
         concentration: 0

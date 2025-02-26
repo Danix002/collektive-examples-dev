@@ -4,8 +4,7 @@ import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
 import it.unibo.collektive.aggregate.api.operators.share
 import it.unibo.collektive.field.operations.max
-import it.unibo.collektive.stdlib.spreading.hopDistanceTo
-import it.unibo.collektive.stdlib.spreading.distanceTo
+import it.unibo.collektive.field.operations.maxBy
 
 /**
  * Third example - Tutorial:
@@ -13,24 +12,12 @@ import it.unibo.collektive.stdlib.spreading.distanceTo
  * 2. The nodes that are the farthest, in terms of hop count, from the maximum-value nodes (which serve as the center of the connected subnetwork) must be colored with different colors.
 */
 
-fun Aggregate<Int>.diameter(source: Boolean, sourceID: Int): Int {
-    // TODO: isolate subnetworks
-    return share(0) { previous ->
-        val closestDistance = myHopDistanceTo(source)
-        previous.max(closestDistance)
-    }
+data class SourceDistance(val sourceID: Int, val distance: Int)
+
+fun Aggregate<Int>.diameter(sourceID: Int, distanceToSource: Int): SourceDistance {
+    val distances = neighboring(SourceDistance(sourceID, distanceToSource))
+    return distances.maxBy(SourceDistance(sourceID, distanceToSource)){ if(sourceID == it.sourceID) it.distance else Int.MIN_VALUE }
 }
 
-fun <ID : Any> Aggregate<ID>.myHopDistanceTo(source: Boolean): Int = 
-    distanceTo(
-        source,                        
-        0,                             
-        Int.MAX_VALUE / 2,             
-        { a: Int, b: Int ->            
-            if (a == Int.MAX_VALUE / 2 || b == Int.MAX_VALUE / 2) Int.MAX_VALUE / 2
-            else (a + b).coerceAtMost(Int.MAX_VALUE / 2) 
-        }
-    ) {
-        neighboring(1)                 
-    }
+
 

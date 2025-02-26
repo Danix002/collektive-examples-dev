@@ -5,6 +5,8 @@ import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
 import it.unibo.collektive.field.operations.max
 import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
 import it.unibo.collektive.examples.diameter.diameter
+import it.unibo.collektive.stdlib.spreading.hopDistanceTo
+import it.unibo.collektive.stdlib.spreading.distanceTo
 
 /**
  * First example - Tutorial:
@@ -45,7 +47,25 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
 
-    environment["diameter"] = diameter(environment["isMaxID"], environment["maxNetworkID"])
+    /* Third example */
+
+    // Note: use hopDistanceTo library function 
+    environment["distanceToSource"] = myHopDistanceTo(environment["isMaxID"])
+
+    environment["diameter"] = diameter(environment["maxNetworkID"], environment["distanceToSource"])
 
     return maxValue
 }
+
+fun <ID : Any> Aggregate<ID>.myHopDistanceTo(source: Boolean): Int = 
+    distanceTo(
+        source,                        
+        0,                             
+        Int.MAX_VALUE,             
+        { a: Int, b: Int ->            
+            if (a == Int.MAX_VALUE || b == Int.MAX_VALUE) Int.MAX_VALUE
+            else (a + b).coerceAtMost(Int.MAX_VALUE) 
+        }
+    ) {
+        neighboring(1)                 
+    }
