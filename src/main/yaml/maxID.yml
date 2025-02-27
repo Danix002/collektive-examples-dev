@@ -31,3 +31,7 @@ deployments:
         concentration: null
       - molecule: distanceToSource
         concentration: 0
+      - molecule: isDiameterDistance
+        concentration: true
+      - molecule: nothing
+        concentration: true

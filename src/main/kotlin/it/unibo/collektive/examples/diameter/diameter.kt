@@ -12,11 +12,19 @@ import it.unibo.collektive.field.operations.maxBy
  * 2. The nodes that are the farthest, in terms of hop count, from the maximum-value nodes (which serve as the center of the connected subnetwork) must be colored with different colors.
 */
 
+// Preliminary step: define a data class to represent the association between a source node and its distance
 data class SourceDistance(val sourceID: Int, val distance: Int)
 
 fun Aggregate<Int>.diameter(sourceID: Int, distanceToSource: Int): SourceDistance {
+    // Step 1: retrieve the distances from neighboring nodes, including the distance of the current node
     val distances = neighboring(SourceDistance(sourceID, distanceToSource))
-    return distances.maxBy(SourceDistance(sourceID, distanceToSource)){ if(sourceID == it.sourceID) it.distance else Int.MIN_VALUE }
+
+    // Step 2: find the neighbor with the maximum distance for the given sourceID
+    return distances.maxBy(SourceDistance(sourceID, distanceToSource)){ 
+
+        // If the sourceID matches, return the actual distance; otherwise, Int.MIN_VALUE is used to exclude it
+        if(sourceID == it.sourceID) it.distance else Int.MIN_VALUE 
+    }
 }
 
 
