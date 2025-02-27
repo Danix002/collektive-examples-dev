@@ -35,3 +35,18 @@ deployments:
         concentration: true
       - molecule: nothing
         concentration: true
+      - molecule: diameterValue
+        concentration: 0
+
+export:
+  - type: CSVExporter
+    parameters:
+      fileNameRoot: "tutorial-examples"
+      interval: 1.0
+      exportPath: "data"
+    data:
+      - time
+      - molecule: diameterValue
+        aggregators: [ mean ]
+        value-filter: onlyfinite
+        precision: 1
