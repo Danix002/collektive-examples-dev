@@ -62,9 +62,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     val diameterDistance = networkDiameter.distance
 
     environment["diameterValue"] = diameterDistance
-
     environment["isDiameterDistance"] = diameterDistance == environment["distanceToSource"]
-
     environment["nothing"] =  !(environment["isDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])
 
     return maxValue
