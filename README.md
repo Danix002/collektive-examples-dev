@@ -10,7 +10,7 @@ To run the examples, you need to clone this repository on your pc, moving into t
 ./gradlew run<ExampleName>Batch
 ```
 
-Where `<ExampleName>` is the name of the example you want to run in batch mode(FieldEvolution, NeighborCounter, Branching, Gradient, MaxID or ChannelWithObstacles).
+Where `<ExampleName>` is the name of the example you want to run in batch mode (FieldEvolution, NeighborCounter, Branching, Gradient, MaxID, Exercises or ChannelWithObstacles).
 
 ## Running graphical simulations
 
@@ -23,7 +23,7 @@ And it will list all the available tasks, including the ones for the graphical s
 ```bash
 ./gradlew run<ExampleName>Graphic
 ```
-Where `<ExampleName>` is the name of the example you want to run (FieldEvolution, NeighborCounter, Branching, Gradient, MaxID or ChannelWithObstacles).
+Where `<ExampleName>` is the name of the example you want to run (FieldEvolution, NeighborCounter, Branching, Gradient, MaxID, Exercises or ChannelWithObstacles).
 
 *Note: to run a program with the "Graphics" tag, it is essential that the environment variable "env:CI" is set to false.*
 
