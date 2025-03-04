@@ -2,7 +2,7 @@
 
 This repository contains the code for the examples of the [Collektive](https://github.com/Collektive/collektive) DSL and STDLIB.
 
-## How to run the examples
+## How to run the examples natively
 
 To run the examples, you need to clone this repository on your pc, moving into the root folder and running the following command:
 
@@ -40,4 +40,4 @@ export CI=true
 ```power-shell
 $env:CI="true" 
 ```
-
+## How to run the examples with containers
