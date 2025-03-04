@@ -1,0 +1,53 @@
+services:
+  prepare:
+    image: ubuntu:24.04
+    volumes:
+      - .:/examples:rw
+    entrypoint: /bin/sh -c
+    command:
+      - |
+        mkdir -p /examples/data
+        chmod 777 /examples/data
+        mkdir -p /examples/plot
+        chmod 777 /examples/plot
+
+  simulation:
+    environment:
+      CI: "false"
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+    image: Danix002/examples-simulation
+    build:
+      dockerfile: ./docker/sim/Dockerfile.txt
+      context: .
+    volumes:
+     - ./data:/examples/data
+
+  plot:
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+      simulation:
+        condition: service_completed_successfully
+    build:
+      dockerfile: ./docker/charts/Dockerfile.txt
+      context: .
+    volumes:
+      - ./data:/examples/data
+      - ./plot:/examples/plot
+
+  finish:
+    depends_on:
+      plot:
+        condition: service_completed_successfully
+    image: alpine:3.21.3
+    volumes:
+      - .:/examples:rw
+    entrypoint: /bin/sh -c
+    command:
+      - |
+        find /examples/data -type d -exec chmod 777 {} \;
+        find /examples/plot -type d -exec chmod 777 {} \;
+        find /examples/data -type f -exec chmod 666 {} \;
+        find /examples/plot -type f -exec chmod 666 {} \;
