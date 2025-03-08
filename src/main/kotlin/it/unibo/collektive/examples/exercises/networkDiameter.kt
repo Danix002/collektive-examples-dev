@@ -18,7 +18,7 @@ import it.unibo.collektive.field.operations.minBy
 
 data class DistanceFrom(val from: Int, val distance: Int)
 
-fun Aggregate<Int>.diameter(environment: EnvironmentVariables, distanceSensor: DistanceSensor) = calculateDiameter(environment, distanceSensor) 
+fun Aggregate<Int>.networkDiameter(environment: EnvironmentVariables, distanceSensor: DistanceSensor) = calculateDiameter(environment, distanceSensor) 
 
 fun Aggregate<Int>.calculateDiameter(environment: EnvironmentVariables, distanceSensor: DistanceSensor): Int {
     // Individuate source and calculate distance from the previous exercises

@@ -4,7 +4,7 @@ import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
 import it.unibo.collektive.field.operations.max
 import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
-import it.unibo.collektive.examples.diameter.diameter
+import it.unibo.collektive.examples.subnetDiameter.subnetDiameter
 import it.unibo.collektive.stdlib.spreading.hopDistanceTo
 import it.unibo.collektive.stdlib.spreading.distanceTo
 
@@ -55,7 +55,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     // Note: use hopDistanceTo library function 
     environment["distanceToSource"] = myHopDistanceTo(environment["isMaxID"])
 
-    val networkDiameter = diameter(environment["maxNetworkID"], environment["distanceToSource"])
+    val networkDiameter = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
 
     environment["diameter"] = networkDiameter
 

@@ -1,4 +1,4 @@
-package it.unibo.collektive.examples.diameter
+package it.unibo.collektive.examples.subnetDiameter
 
 import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
@@ -15,7 +15,7 @@ import it.unibo.collektive.field.operations.maxBy
 // Preliminary step: define a data class to represent the association between a source node and its distance
 data class SourceDistance(val sourceID: Int, val distance: Int)
 
-fun Aggregate<Int>.diameter(sourceID: Int, distanceToSource: Int): SourceDistance {
+fun Aggregate<Int>.subnetDiameter(sourceID: Int, distanceToSource: Int): SourceDistance {
     // Step 1: retrieve the distances from neighboring nodes, including the distance of the current node
     val distances = neighboring(SourceDistance(sourceID, distanceToSource))
 

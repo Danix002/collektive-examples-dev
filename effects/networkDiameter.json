@@ -94,7 +94,7 @@
         "val": 10
       },
       "molFilter": true,
-      "molString": "it.unibo.collektive.examples.exercises.NetworkDiameterKt.diameter",
+      "molString": "it.unibo.collektive.examples.exercises.NetworkDiameterKt.networkDiameter",
       "molPropertyFilter": true,
       "property": "",
       "writingPropertyValue": true,
