@@ -17,7 +17,12 @@ fun Aggregate<Int>.calculateDistance(environment: EnvironmentVariables): Int {
     // Individuate source from the previous exercise 
     minNetworkID(environment)
 
-    // TODO explanation comment
+    // The `distanceTo` function calculates the minimum distance between adjacent neighboring nodes,
+    // starting from the source node and propagating distances to all other nodes.
+    // If a node is unreachable, its distance is set to `Int.MAX_VALUE`.
+    //
+    // The aggregation operation uses a reduction function that sums the distances of neighboring nodes,
+    // with a limit of `Int.MAX_VALUE` to prevent overflow.
     environment["distanceToSource"] = distanceTo(
         environment["source"],                        
         0,                             
