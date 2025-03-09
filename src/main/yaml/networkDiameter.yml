@@ -19,6 +19,8 @@ deployments:
     contents:
       - molecule: source
         concentration: true
+      - molecule: sourceID
+        concentration: true
       - molecule: distanceToSource
         concentration: 0
       - molecule: maxHop

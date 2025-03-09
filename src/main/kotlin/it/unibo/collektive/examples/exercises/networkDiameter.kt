@@ -6,38 +6,31 @@ import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
 import it.unibo.alchemist.collektive.device.DistanceSensor
 import it.unibo.collektive.examples.exercises.calculateDistance
 import it.unibo.collektive.examples.channel.broadcast
-import it.unibo.collektive.field.operations.maxBy
 import it.unibo.collektive.field.operations.max
+import it.unibo.collektive.field.operations.min
+import it.unibo.collektive.field.operations.maxBy
 import it.unibo.collektive.field.operations.maxWithSelf
-import it.unibo.collektive.field.operations.minBy
 
 /**
  * 3) Calculate in the source an estimate of the true diameter of the network (the maximum distance of a device in the network).
  * 4) Broadcast the diameter to every node in the network.
 */
 
-data class DistanceFrom(val from: Int, val distance: Int)
+data class DistanceFrom(val from: Int, val distance: Int, val to: Int)
 
 fun Aggregate<Int>.networkDiameter(environment: EnvironmentVariables, distanceSensor: DistanceSensor) = calculateDiameter(environment, distanceSensor) 
 
 fun Aggregate<Int>.calculateDiameter(environment: EnvironmentVariables, distanceSensor: DistanceSensor): Int {
     // Individuate source and calculate distance from the previous exercises
     calculateDistance(environment)
+
+    // Calculate the distance of the local minimum for each neighborhood field
     val distance: Int = environment["distanceToSource"]
 
-    val distances = neighboring(DistanceFrom(localId, distance))
+    // Identifies the node with the maximum number of hops to the source
+    var distances = neighboring(DistanceFrom(localId, distance, environment["sourceID"]))
+    val maxHop = distances.maxBy(DistanceFrom(localId, distance, environment["sourceID"])) { it.distance }.distance
     
-    // Use the map to calculate the sum of the distances for each pair of neighboring nodes
-    var maxHop = distances.map { (from, otherDistance) ->
-        // Adds the distance of the current neighbor to that of the other neighbors
-        if (from != localId) {
-            otherDistance + distance
-        } else {
-            // Don't add the distance to yourself
-            0 
-        }
-    }.max(distance)
-
     // Propagate result in the network
     val maxLocalDistance = neighboring(maxHop).max(maxHop)
     val maxNetworkDistance = neighboring(maxLocalDistance).max(maxLocalDistance)

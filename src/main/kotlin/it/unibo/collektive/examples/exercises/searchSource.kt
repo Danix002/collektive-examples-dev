@@ -33,6 +33,7 @@ fun Aggregate<Int>.minNetworkID(environment: EnvironmentVariables): Int {
 
     // Assign the result to a molecule (only if using Alchemist)
     environment["source"] = localId == minValue
+    environment["sourceID"] = minValue
 
     // The program return localId assigned at nodes label in simulation
     return localId
