@@ -19,11 +19,13 @@ deployments:
     contents:
       - molecule: source
         concentration: true
-      - molecule: sourceID
-        concentration: true
+      - molecule: localMinID
+        concentration: 0
       - molecule: distanceToSource
         concentration: 0
-      - molecule: maxHop
+      - molecule: furthest
+        concentration: true
+      - molecule: distanceToFurthest
         concentration: 0
       - molecule: networkDiameter
         concentration: 0

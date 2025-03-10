@@ -10,10 +10,10 @@ import it.unibo.collektive.stdlib.spreading.distanceTo
  * 2) Compute the distances between any node and the "source" using the adaptive bellman-ford algorithm.
 */
 
-fun Aggregate<Int>.distanceToSource(environment: EnvironmentVariables) = calculateDistance(environment) 
+fun Aggregate<Int>.distanceToSource(environment: EnvironmentVariables) = calculateDistanceToSource(environment) 
 
 
-fun Aggregate<Int>.calculateDistance(environment: EnvironmentVariables): Int {
+fun Aggregate<Int>.calculateDistanceToSource(environment: EnvironmentVariables): Int {
     // Individuate source from the previous exercise 
     minNetworkID(environment)
 

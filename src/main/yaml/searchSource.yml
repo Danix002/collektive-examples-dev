@@ -19,6 +19,6 @@ deployments:
     contents:
       - molecule: source
         concentration: true
-      - molecule: sourceID
-        concentration: true
+      - molecule: localMinID
+        concentration: 0
       
