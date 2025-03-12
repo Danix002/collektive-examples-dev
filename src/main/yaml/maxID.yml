@@ -35,7 +35,7 @@ deployments:
         concentration: true
       - molecule: nothing
         concentration: true
-      - molecule: diameterValue
+      - molecule: subDiameterValue
         concentration: 0
 
 export:
@@ -46,7 +46,7 @@ export:
       exportPath: "data"
     data:
       - time
-      - molecule: diameterValue
+      - molecule: subDiameterValue
         aggregators: [ mean ]
         value-filter: onlyfinite
         precision: 1

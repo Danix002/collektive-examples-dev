@@ -62,7 +62,7 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
     val diameterDistance = networkDiameter.distance
 
     // Collektive & Alchemist: Assign the result to a molecule
-    environment["diameterValue"] = diameterDistance
+    environment["subDiameterValue"] = diameterDistance
     environment["isDiameterDistance"] = diameterDistance == environment["distanceToSource"]
     environment["nothing"] =  !(environment["isDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])
 
