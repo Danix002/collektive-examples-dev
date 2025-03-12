@@ -51,11 +51,8 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
 
     /* Third example */
 
-    // Preliminary step: the distance from the nearest source is calculated using the hopDistanceTo library function 
-    // (see the "Tutorial > Standard Library Functions" section for a detailed description)
-    
-    // Note: use hopDistanceTo library function 
-    environment["distanceToSource"] = myHopDistanceTo(environment["isMaxID"])
+    // Preliminary step: the distance from the nearest source is calculated using the distanceTo library function 
+    environment["distanceToSource"] = distanceToSource(environment["isMaxID"])
 
     val networkDiameter = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
 
@@ -72,7 +69,7 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
     return maxValue
 }
 
-fun <ID : Any> Aggregate<ID>.myHopDistanceTo(source: Boolean): Int = 
+fun <ID : Any> Aggregate<ID>.distanceToSource(source: Boolean): Int = 
     distanceTo(
         source,                        
         0,                             
