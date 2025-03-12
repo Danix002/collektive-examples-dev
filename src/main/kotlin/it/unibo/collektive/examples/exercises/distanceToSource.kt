@@ -3,19 +3,16 @@ package it.unibo.collektive.examples.exercises
 import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
 import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
-import it.unibo.collektive.examples.exercises.minNetworkID
+import it.unibo.collektive.examples.exercises.searchSource
 import it.unibo.collektive.stdlib.spreading.distanceTo
 
 /**
  * 2) Compute the distances between any node and the "source" using the adaptive bellman-ford algorithm.
 */
 
-fun Aggregate<Int>.distanceToSource(environment: EnvironmentVariables) = calculateDistanceToSource(environment) 
-
-
-fun Aggregate<Int>.calculateDistanceToSource(environment: EnvironmentVariables): Int {
+fun Aggregate<Int>.distanceToSource(environment: EnvironmentVariables): Int {
     // Individuate source from the previous exercise 
-    minNetworkID(environment)
+    searchSource(environment)
 
     // The `distanceTo` function calculates the minimum distance between adjacent neighboring nodes,
     // starting from the source node and propagating distances to all other nodes.

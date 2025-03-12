@@ -10,14 +10,16 @@ import it.unibo.collektive.stdlib.spreading.distanceTo
 
 /**
  * First example - Tutorial:
- * 1. Identify the maximum value among the neighboring nodes.
+ * 1. Identify the maximum ID value among the neighboring nodes.
+ * 
+ * Collektive & Alchemist:
  * 2. Assign a distinct color to the nodes with the identified maximum values.
  * Second example - Tutorial:
- * 3. Identify the maximum value in the network.
+ * 3. Identify the maximum ID value in the network.
+ * 
+ * Collektive & Alchemist:
  * 4. Assign a distinct color to the nodes with the identified maximum values.
 */
-
-fun Aggregate<Int>.maxID(environment: EnvironmentVariables) = maxNetworkID(environment)
 
 fun Aggregate<Int>.maxNeighborID(): Int {
     // Step 1: Exchange the localId with neighbors and obtain a field of values
@@ -29,12 +31,12 @@ fun Aggregate<Int>.maxNeighborID(): Int {
     return maxValue
 }
 
-fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
+fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
     val maxLocalValue = maxNeighborID()
 
-    // Step 3: Assign the result to a molecule
-    environment["isMaxLocalID"] = localId == maxLocalValue
+    // Collektive & Alchemist: Assign the result to a molecule
     environment["localID"] = localId
+    environment["isMaxLocalID"] = localId == maxLocalValue
     environment["maxNeighborID"] = maxLocalValue
 
     // Step 1: Exchange the maxNeighborID with neighbors and obtain a field of values
@@ -43,7 +45,7 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
     // Step 2: Find the maximum value among neighbors (including self)
     val maxValue = neighborValues.max(base = maxLocalValue)
 
-    // Step 3: Assign the result to a molecule (only if using Alchemist)
+    // Collektive & Alchemist: Assign the result to a molecule 
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
 
@@ -57,10 +59,12 @@ fun Aggregate<Int>.maxNetworkID(environment: EnvironmentVariables): Int {
 
     val networkDiameter = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
 
+    // Collektive & Alchemist: Assign the result to a molecule
     environment["diameter"] = networkDiameter
 
     val diameterDistance = networkDiameter.distance
 
+    // Collektive & Alchemist: Assign the result to a molecule
     environment["diameterValue"] = diameterDistance
     environment["isDiameterDistance"] = diameterDistance == environment["distanceToSource"]
     environment["nothing"] =  !(environment["isDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])

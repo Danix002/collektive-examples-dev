@@ -10,8 +10,6 @@ import it.unibo.collektive.alchemist.device.sensors.EnvironmentVariables
  * in the network, assuming that the diameter of the network is no more than 10 hops.
 */
 
-fun Aggregate<Int>.searchSource(environment: EnvironmentVariables) = minNetworkID(environment) 
-
 fun Aggregate<Int>.minNeighborID(): Int {
     // Exchange the localId with neighbors and obtain a field of values
     val neighborValues = neighboring(local = localId)
@@ -22,7 +20,7 @@ fun Aggregate<Int>.minNeighborID(): Int {
     return maxValue
 }
 
-fun Aggregate<Int>.minNetworkID(environment: EnvironmentVariables): Int {
+fun Aggregate<Int>.searchSource(environment: EnvironmentVariables): Int {
     val minLocalValue = minNeighborID()
 
     // Exchange the minLocalValue with neighbors and obtain a field of values
