@@ -13,12 +13,13 @@ import it.unibo.collektive.stdlib.spreading.distanceTo
  * 1. Identify the maximum ID value among the neighboring nodes.
  * 
  * Collektive & Alchemist:
- * 2. Assign a distinct color to the nodes with the identified maximum values.
+ * 2. Assign a distinct color to the nodes with the identified maximum ID values.
+ * 
  * Second example - Tutorial:
  * 3. Identify the maximum ID value in the network.
  * 
  * Collektive & Alchemist:
- * 4. Assign a distinct color to the nodes with the identified maximum values.
+ * 4. Assign a distinct color to the nodes with the identified maximum ID values.
 */
 
 fun Aggregate<Int>.maxNeighborID(): Int {
