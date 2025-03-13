@@ -51,12 +51,12 @@ fun Aggregate<Int>.networkDiameter(environment: EnvironmentVariables, distanceSe
     return localId
 }
 
-fun Aggregate<Int>.maxValue(value: Int, localValue: Int? = 0): Boolean {
+fun Aggregate<Int>.maxValue(value: Int, localValue: Int? = Int.MIN_VALUE): Boolean {
     // Find the maximum value in the neighborhood field
     val maxValue = neighboring(value).max(value)
 
     // localValue is an optional parameter to evaluate (during maximum identification) an additional local value of the node
-    if(localValue != 0){
+    if(localValue != Int.MIN_VALUE){
         return maxValue == value && localValue == value
     }else{
         return maxValue == value
