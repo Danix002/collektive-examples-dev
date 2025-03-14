@@ -2,18 +2,18 @@ incarnation: collektive
 
 network-model:
   type: ConnectWithinDistance
-  parameters: [3]
+  parameters: [2]
 
 _pool: &program
   - time-distribution: 1
     type: Event
     actions:
       - type: RunCollektiveProgram
-        parameters: [it.unibo.collektive.examples.maxID.MaxIDKt.maxID]
+        parameters: [it.unibo.collektive.examples.tutorialExample.TutorialExampleKt.maxID]
 
 deployments:
   - type: GraphStreamDeployment
-    parameters: [50, 3, 0, PreferentialAttachment]
+    parameters: [20, 2, 0, PreferentialAttachment]
     programs:
       - *program
     contents:
@@ -27,11 +27,11 @@ deployments:
         concentration: 0
       - molecule: maxNetworkID
         concentration: 0
-      - molecule: diameter
+      - molecule: subnetDiameter
         concentration: null
       - molecule: distanceToSource
         concentration: 0
-      - molecule: isDiameterDistance
+      - molecule: isSubnetDiameterDistance
         concentration: true
       - molecule: nothing
         concentration: true
@@ -41,7 +41,7 @@ deployments:
 export:
   - type: CSVExporter
     parameters:
-      fileNameRoot: "tutorial-examples"
+      fileNameRoot: "tutorial-example"
       interval: 1.0
       exportPath: "data"
     data:

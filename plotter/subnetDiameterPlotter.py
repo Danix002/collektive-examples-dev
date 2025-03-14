@@ -17,8 +17,8 @@ def plot_csv(inputFile):
     plt.xlabel('Time')
     plt.ylabel('Subnet Diameter (hop distance to source)')
     
-    output_file = os.path.join('plot', 'tutorial-examples.png')
+    output_file = os.path.join('plot', 'tutorial-example.png')
     plt.savefig(output_file)
     
-inputFile = 'data/tutorial-examples.csv' 
+inputFile = 'data/tutorial-example.csv' 
 plot_csv(inputFile)

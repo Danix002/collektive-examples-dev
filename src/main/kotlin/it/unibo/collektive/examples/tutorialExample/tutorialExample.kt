@@ -1,4 +1,4 @@
-package it.unibo.collektive.examples.maxID
+package it.unibo.collektive.examples.tutorialExample
 
 import it.unibo.collektive.aggregate.api.Aggregate
 import it.unibo.collektive.aggregate.api.Aggregate.Companion.neighboring
@@ -58,14 +58,14 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
     val networkDiameter = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
 
     // Collektive & Alchemist: Assign the result to a molecule
-    environment["diameter"] = networkDiameter
+    environment["subnetDiameter"] = networkDiameter
 
     val diameterDistance = networkDiameter.distance
 
     // Collektive & Alchemist: Assign the result to a molecule
     environment["subnetDiameterValue"] = diameterDistance
-    environment["isDiameterDistance"] = diameterDistance == environment["distanceToSource"]
-    environment["nothing"] =  !(environment["isDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])
+    environment["isSubnetDiameterDistance"] = diameterDistance == environment["distanceToSource"]
+    environment["nothing"] =  !(environment["isSubnetDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])
 
     return maxValue
 }
