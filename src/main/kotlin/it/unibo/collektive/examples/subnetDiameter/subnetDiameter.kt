@@ -7,7 +7,7 @@ import it.unibo.collektive.field.operations.max
 import it.unibo.collektive.field.operations.maxBy
 
 /**
- * Third example - Tutorial:
+ * Third part:
  * 1. Determine the diameter of the subnetworks corresponding to the nodes with the maximum ID values in the network of the last exercise.
  * 
  * Collektive & Alchemist:

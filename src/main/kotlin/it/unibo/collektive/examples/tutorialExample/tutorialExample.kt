@@ -9,13 +9,13 @@ import it.unibo.collektive.stdlib.spreading.hopDistanceTo
 import it.unibo.collektive.stdlib.spreading.distanceTo
 
 /**
- * First example - Tutorial:
+ * First part:
  * 1. Identify the maximum ID values among the neighboring nodes.
  * 
  * Collektive & Alchemist:
  * 2. Assign a distinct color to the nodes with the identified maximum local ID values.
  * 
- * Second example - Tutorial:
+ * Second part:
  * 3. Identify the maximum ID values in the network.
  * 
  * Collektive & Alchemist:
@@ -50,21 +50,21 @@ fun Aggregate<Int>.maxID(environment: EnvironmentVariables): Int {
     environment["isMaxID"] = localId == maxValue
     environment["maxNetworkID"] = maxValue
 
-    /* Third example */
+    /* Third part */
 
     // Preliminary step: the distance from the nearest source is calculated using the distanceTo library function 
     environment["distanceToSource"] = distanceToSource(environment["isMaxID"])
 
-    val networkDiameter = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
+    val subnetDiameterValue = subnetDiameter(environment["maxNetworkID"], environment["distanceToSource"])
 
     // Collektive & Alchemist: Assign the result to a molecule
-    environment["subnetDiameter"] = networkDiameter
+    environment["subnetDiameter"] = subnetDiameterValue
 
-    val diameterDistance = networkDiameter.distance
+    val subnetDiameterDistance = subnetDiameterValue.distance
 
     // Collektive & Alchemist: Assign the result to a molecule
-    environment["subnetDiameterValue"] = diameterDistance
-    environment["isSubnetDiameterDistance"] = diameterDistance == environment["distanceToSource"]
+    environment["subnetDiameterValue"] = subnetDiameterDistance
+    environment["isSubnetDiameterDistance"] = subnetDiameterDistance == environment["distanceToSource"]
     environment["nothing"] =  !(environment["isSubnetDiameterDistance"] || environment["isMaxID"] || environment["isMaxLocalID"])
 
     return maxValue
