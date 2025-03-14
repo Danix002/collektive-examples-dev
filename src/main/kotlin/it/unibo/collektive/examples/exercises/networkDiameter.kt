@@ -27,13 +27,13 @@ fun Aggregate<Int>.networkDiameter(environment: EnvironmentVariables, distanceSe
     val maxHopToSource = neighboring(distance).max(distance)
 
     // Identifies the node furthest from the source, i.e. the most peripheral node
-    environment["furthest"] = maxValue(maxHopToSource, environment["distanceToSource"])
+    environment["furthest"] = isMaxValue(maxHopToSource, environment["distanceToSource"])
 
     // Calculate distance to furthest node from the source in the network
     val distanceToFurthest = distanceToFurthest(environment["furthest"])
 
     // Identifies the node with the maximum number of hops corresponding to the diameter of the entire network
-    val flagNodeWithMaxHopToFurthest = maxValue(environment["distanceToFurthest"])
+    val flagNodeWithMaxHopToFurthest = isMaxValue(environment["distanceToFurthest"])
 
     environment["distanceToFurthest"] = distanceToFurthest
 
@@ -51,7 +51,7 @@ fun Aggregate<Int>.networkDiameter(environment: EnvironmentVariables, distanceSe
     return localId
 }
 
-fun Aggregate<Int>.maxValue(value: Int, localValue: Int? = Int.MIN_VALUE): Boolean {
+fun Aggregate<Int>.isMaxValue(value: Int, localValue: Int? = Int.MIN_VALUE): Boolean {
     // Find the maximum value in the neighborhood field
     val maxValue = neighboring(value).max(value)
 

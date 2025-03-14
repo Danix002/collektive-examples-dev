@@ -8,10 +8,10 @@ import it.unibo.collektive.field.operations.maxBy
 
 /**
  * Third example - Tutorial:
- * 1. Determine the diameter of the subnetworks corresponding to the nodes with the maximum ID values of the last exercise.
+ * 1. Determine the diameter of the subnetworks corresponding to the nodes with the maximum ID values in the network of the last exercise.
  * 
  * Collektive & Alchemist:
- * 2. The nodes that are the farthest, in terms of hop count, from the maximum ID value nodes (which serve as the center of the connected subnetwork) must be colored with different colors.
+ * 2. The nodes that are the farthest, in terms of hop count, from the nodes with the maximum ID values in the network (which serve as the center of the connected subnetwork) must be colored with different colors.
 */
 
 // Preliminary step: define a data class to represent the association between a source node and its distance
