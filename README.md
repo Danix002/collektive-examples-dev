@@ -25,19 +25,6 @@ And it will list all the available tasks, including the ones for the graphical s
 ```
 Where `<ExampleName>` is the name of the example you want to run (FieldEvolution, NeighborCounter, Branching, Gradient, MaxID, Exercises or ChannelWithObstacles).
 
-*Note: to run a program with the "Graphics" tag, it is essential that the environment variable "env:CI" is set to false.*
+*Note: to run a program with the Graphics mode, it is essential that the environment variable `env:CI` is set to false.*
 
-This variable determines whether the system is operating in a Continuous Integration (CI) environment. If the variable is set to true, certain arguments in the YAML files defined in the build.gradle are overridden. For instance, [in this case](https://github.com/angelacorte/collektive-stdlib-simulations/blob/c0730883e27299c7bb7daa5ea86035c77965bb26/build.gradle.kts#L108), a termination condition for the simulation is added after 2 simulated seconds. 
-
-To configure the environment variable, the following command is used:
-
-#### Linux
-```bash
-export CI=true
-```
-
-#### Windows
-```power-shell
-$env:CI="true" 
-```
-## How to run the examples with containers
+## How to run the examples with containers (not recommended with the graphical simulation)
